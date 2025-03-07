@@ -1,8 +1,8 @@
-import { SelectSaleController } from "./SelectSaleController";
-import { ListSaleController } from "./ListSaleController";
-import { CreateSaleController } from "./CreateSaleController";
-import { UpdateSaleController } from "./UpdateSaleController";
-import { DeleteSaleController } from "./DeleteSaleController";
+import SelectSaleController from "./SelectSaleController";
+import ListSaleController from "./ListSaleController";
+import CreateSaleController from "./CreateSaleController";
+import UpdateSaleController from "./UpdateSaleController";
+import DeleteSaleController from "./DeleteSaleController";
 
 export default class SaleController {
    select = new SelectSaleController();

@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
+import DeleteUserService from "../../service/user/DeleteUserService copy";
 
-class DeleteUserController {
+export default class DeleteUserController {
    async handle(request: Request, response: Response) {
+      const deleteUserService = new DeleteUserService();
       const id = request.params.id;
 
-      response.json({
-         message: `Registro excluido com sucesso: ${id}`,
-      });
+      const msg = await deleteUserService.execute(id);
+
+      response.json(msg);
    }
 }
-
-export { DeleteUserController };

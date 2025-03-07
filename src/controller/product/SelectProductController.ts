@@ -1,19 +1,13 @@
 import { Request, Response } from "express";
+import SelectProductService from "../../service/product/SelectProductService";
 
-class SelectProductController {
+export default class SelectProductController {
    async handle(request: Request, response: Response) {
       const id = request.params.id;
+      const selectProductService = new SelectProductService();
 
-      const product = {
-         id,
-         name: "Camiseta",
-         category: "Vestuario",
-         description: "Camiseta preta",
-         price: 30,
-      };
+      const product = await selectProductService.execute(id);
 
       response.json(product);
    }
 }
-
-export { SelectProductController };

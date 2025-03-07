@@ -1,21 +1,14 @@
 import { Request, Response } from "express";
+import CreateSaleService from "../../service/sale/CreateSaleService";
 
-class CreateSaleController {
+export default class CreateSaleController {
    async handle(request: Request, response: Response) {
-      const { date, product, customer, quantity, total } = request.body;
-
-      const sale = {
-         date,
-         product,
-         customer,
-         quantity,
-         total,
-      };
+      const createSaleService = new CreateSaleService();
+      const saleRequest = request.body;
+      const sale = await createSaleService.execute(saleRequest);
 
       response.json({
-         message: `Registro incluido com sucesso: ${sale.product}`,
+         message: `Registro incluido com sucesso: ${sale.date}`,
       });
    }
 }
-
-export { CreateSaleController };

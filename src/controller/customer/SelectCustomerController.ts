@@ -1,22 +1,13 @@
 import { Request, Response } from "express";
+import SelectCustomerService from "../../service/customer/SelectCustomerService";
 
-class SelectCustomerController {
+export default class SelectCustomerController {
    async handle(request: Request, response: Response) {
       const id = request.params.id;
+      const selectCustomerService = new SelectCustomerService();
 
-      const customer = {
-         id,
-         name: "Roque",
-         phone: "11972775377",
-         email: "roque@email.com",
-         address: "Rua das flores",
-         neighborhood: "Centro",
-         city: "Mogi das Cruzes",
-         state: "São Paulo",
-      };
+      const customer = await selectCustomerService.execute(id);
 
       response.json(customer);
    }
 }
-
-export { SelectCustomerController };

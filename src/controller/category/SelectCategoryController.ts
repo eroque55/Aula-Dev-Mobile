@@ -1,16 +1,13 @@
 import { Request, Response } from "express";
+import SelectCategoryService from "../../service/category/SelectCategoryService";
 
-class SelectCategoryController {
+export default class SelectCategoryController {
    async handle(request: Request, response: Response) {
       const id = request.params.id;
+      const selectCategoryService = new SelectCategoryService();
 
-      const category = {
-         id,
-         name: "Vestuario",
-      };
+      const category = await selectCategoryService.execute(id);
 
       response.json(category);
    }
 }
-
-export { SelectCategoryController };

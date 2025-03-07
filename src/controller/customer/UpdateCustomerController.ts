@@ -1,26 +1,18 @@
 import { Request, Response } from "express";
+import UpdateCustomerService from "../../service/customer/UpdateCustomerService";
 
-class UpdateCustomerController {
+export default class UpdateCustomerController {
    async handle(request: Request, response: Response) {
-      const { name, phone, email, address, neighborhood, city, state } =
-         request.body;
+      const createCustomerService = new UpdateCustomerService();
+      const customerRequest = request.body;
       const id = request.params.id;
-
-      const customer = {
+      const customer = await createCustomerService.execute({
+         ...customerRequest,
          id,
-         name,
-         phone,
-         email,
-         address,
-         neighborhood,
-         city,
-         state,
-      };
+      });
 
       response.json({
          message: `Registro alterado com sucesso: id:${customer.id}`,
       });
    }
 }
-
-export { UpdateCustomerController };

@@ -1,22 +1,18 @@
 import { Request, Response } from "express";
+import UpdateProductService from "../../service/product/UpdateProductService";
 
-class UpdateProductController {
+export default class UpdateProductController {
    async handle(request: Request, response: Response) {
-      const { name, category, description, price } = request.body;
+      const createProductService = new UpdateProductService();
+      const productRequest = request.body;
       const id = request.params.id;
-
-      const product = {
+      const product = await createProductService.execute({
+         ...productRequest,
          id,
-         name,
-         category,
-         description,
-         price,
-      };
+      });
 
       response.json({
          message: `Registro alterado com sucesso: id:${product.id}`,
       });
    }
 }
-
-export { UpdateProductController };

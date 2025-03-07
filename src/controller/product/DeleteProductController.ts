@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
+import DeleteProductService from "../../service/product/DeleteProductService";
 
-class DeleteProductController {
+export default class DeleteProductController {
    async handle(request: Request, response: Response) {
+      const deleteProductService = new DeleteProductService();
       const id = request.params.id;
 
-      response.json({
-         message: `Registro excluido com sucesso: ${id}`,
-      });
+      const msg = await deleteProductService.execute(id);
+
+      response.json(msg);
    }
 }
-
-export { DeleteProductController };

@@ -1,22 +1,15 @@
 import { Request, Response } from "express";
+import UpdateUserService from "../../service/user/UpdateUserService";
 
-class UpdateUserController {
+export default class UpdateUserController {
    async handle(request: Request, response: Response) {
-      const { name, email, admin, password } = request.body;
+      const createUserService = new UpdateUserService();
+      const userRequest = request.body;
       const id = request.params.id;
-
-      const user = {
-         id,
-         name,
-         email,
-         admin,
-         password,
-      };
+      const user = await createUserService.execute({ ...userRequest, id });
 
       response.json({
          message: `Registro alterado com sucesso: id:${user.id}`,
       });
    }
 }
-
-export { UpdateUserController };

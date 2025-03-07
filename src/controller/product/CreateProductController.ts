@@ -1,20 +1,14 @@
 import { Request, Response } from "express";
+import CreateProductService from "../../service/product/CreateProductService";
 
-class CreateProductController {
+export default class CreateProductController {
    async handle(request: Request, response: Response) {
-      const { name, category, description, price } = request.body;
-
-      const product = {
-         name,
-         category,
-         description,
-         price,
-      };
+      const createProductService = new CreateProductService();
+      const productRequest = request.body;
+      const product = await createProductService.execute(productRequest);
 
       response.json({
          message: `Registro incluido com sucesso: ${product.name}`,
       });
    }
 }
-
-export { CreateProductController };

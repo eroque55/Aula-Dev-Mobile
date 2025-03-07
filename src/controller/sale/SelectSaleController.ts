@@ -1,20 +1,13 @@
 import { Request, Response } from "express";
+import SelectSaleService from "../../service/sale/SelectSaleService";
 
-class SelectSaleController {
+export default class SelectSaleController {
    async handle(request: Request, response: Response) {
       const id = request.params.id;
+      const selectSaleService = new SelectSaleService();
 
-      const sale = {
-         id,
-         date: "27/02/2025",
-         product: "Camiseta",
-         customer: "Roque",
-         quantity: 1,
-         total: 30,
-      };
+      const sale = await selectSaleService.execute(id);
 
       response.json(sale);
    }
 }
-
-export { SelectSaleController };

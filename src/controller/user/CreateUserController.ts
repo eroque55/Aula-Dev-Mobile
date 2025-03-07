@@ -1,20 +1,14 @@
 import { Request, Response } from "express";
+import CreateUserService from "../../service/user/CreateUserService";
 
-class CreateUserController {
+export default class CreateUserController {
    async handle(request: Request, response: Response) {
-      const { name, email, admin, password } = request.body;
-
-      const user = {
-         name,
-         email,
-         admin,
-         password,
-      };
+      const createUserService = new CreateUserService();
+      const userRequest = request.body;
+      const user = await createUserService.execute(userRequest);
 
       response.json({
          message: `Registro incluido com sucesso: ${user.name}`,
       });
    }
 }
-
-export { CreateUserController };

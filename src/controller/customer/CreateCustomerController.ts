@@ -1,24 +1,14 @@
 import { Request, Response } from "express";
+import CreateCustomerService from "../../service/customer/CreateCustomerService";
 
-class CreateCustomerController {
+export default class CreateCustomerController {
    async handle(request: Request, response: Response) {
-      const { name, phone, email, address, neighborhood, city, state } =
-         request.body;
-
-      const customer = {
-         name,
-         phone,
-         email,
-         address,
-         neighborhood,
-         city,
-         state,
-      };
+      const createCustomerService = new CreateCustomerService();
+      const customerRequest = request.body;
+      const customer = await createCustomerService.execute(customerRequest);
 
       response.json({
          message: `Registro incluido com sucesso: ${customer.name}`,
       });
    }
 }
-
-export { CreateCustomerController };

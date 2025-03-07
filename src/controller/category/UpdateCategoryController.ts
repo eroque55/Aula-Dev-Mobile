@@ -1,19 +1,18 @@
 import { Request, Response } from "express";
+import UpdateCategoryService from "../../service/category/UpdateCategoryService";
 
-class UpdateCategoryController {
+export default class UpdateCategoryController {
    async handle(request: Request, response: Response) {
-      const { name } = request.body;
+      const createCategoryService = new UpdateCategoryService();
+      const categoryRequest = request.body;
       const id = request.params.id;
-
-      const category = {
+      const category = await createCategoryService.execute({
+         ...categoryRequest,
          id,
-         name,
-      };
+      });
 
       response.json({
          message: `Registro alterado com sucesso: id:${category.id}`,
       });
    }
 }
-
-export { UpdateCategoryController };

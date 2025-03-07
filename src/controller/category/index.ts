@@ -1,8 +1,8 @@
-import { SelectCategoryController } from "./SelectCategoryController";
-import { ListCategoryController } from "./ListCategoryController";
-import { CreateCategoryController } from "./CreateCategoryController";
-import { UpdateCategoryController } from "./UpdateCategoryController";
-import { DeleteCategoryController } from "./DeleteCategoryController";
+import SelectCategoryController from "./SelectCategoryController";
+import ListCategoryController from "./ListCategoryController";
+import CreateCategoryController from "./CreateCategoryController";
+import UpdateCategoryController from "./UpdateCategoryController";
+import DeleteCategoryController from "./DeleteCategoryController";
 
 export default class CategoryController {
    select = new SelectCategoryController();
