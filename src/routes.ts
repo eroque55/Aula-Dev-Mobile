@@ -5,14 +5,18 @@ import CustomerController from "./controller/customer";
 import ProductController from "./controller/product";
 import SaleController from "./controller/sale";
 import UserController from "./controller/user";
+import AuthController from "./controller/auth/AuthController";
+import ensureAuthenticated from "./middleware/EnsureAutenticated";
 
 const categoryController = new CategoryController();
 const customerController = new CustomerController();
 const productController = new ProductController();
 const saleController = new SaleController();
 const userController = new UserController();
+const authController = new AuthController();
 
 const router = Router();
+router.use(ensureAuthenticated);
 
 router.get("/categories/:id", categoryController.select.handle);
 router.get("/categories/", categoryController.list.handle);
@@ -43,5 +47,7 @@ router.get("/users/", userController.list.handle);
 router.post("/users", userController.create.handle);
 router.put("/users/:id", userController.update.handle);
 router.delete("/users/:id", userController.delete.handle);
+
+router.post("/auth", authController.handle);
 
 export { router };
