@@ -14,12 +14,10 @@ export default function ensureAuthenticated(
    const authToken = request.headers.authorization;
 
    if (!authToken) {
-      response.status(401).end();
+      response.status(401).end("Está faltando o token de autenticação");
    } else {
-      const [, token] = authToken.split(" ");
       try {
-         const { sub, email } = verify(token, "mobilefatec") as IPayload;
-
+         const { sub, email } = verify(authToken, "mobilefatec") as IPayload;
          next();
       } catch (e: any) {
          response.status(401).end(e.message);

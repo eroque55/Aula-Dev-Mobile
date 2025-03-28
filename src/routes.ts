@@ -16,6 +16,9 @@ const userController = new UserController();
 const authController = new AuthController();
 
 const router = Router();
+
+router.post("/auth", authController.handle);
+
 router.use(ensureAuthenticated);
 
 router.get("/categories/:id", categoryController.select.handle);
@@ -47,7 +50,5 @@ router.get("/users/", userController.list.handle);
 router.post("/users", userController.create.handle);
 router.put("/users/:id", userController.update.handle);
 router.delete("/users/:id", userController.delete.handle);
-
-router.post("/auth", authController.handle);
 
 export { router };
