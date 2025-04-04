@@ -2,6 +2,7 @@ import {
    Column,
    CreateDateColumn,
    Entity,
+   JoinTable,
    ManyToMany,
    ManyToOne,
    PrimaryColumn,
@@ -21,6 +22,7 @@ class Sale {
    date!: Date;
 
    @ManyToMany(() => Product, (product) => product.sales)
+   @JoinTable()
    products!: Product[];
 
    @ManyToOne(() => Customer, (customer) => customer.sales)

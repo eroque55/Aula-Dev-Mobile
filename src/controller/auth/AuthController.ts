@@ -11,7 +11,7 @@ export default class AuthController {
 
          response.json(auth);
       } catch (e: any) {
-         if (e) response.status(400).send(e.message);
+         response.status(400).send(e.message);
       }
    }
 }

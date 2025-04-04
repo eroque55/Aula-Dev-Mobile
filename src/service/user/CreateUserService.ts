@@ -6,17 +6,17 @@ import { hash } from "bcryptjs";
 export default class CreateUserService {
    async execute({ name, email, admin = false, password }: IUser) {
       if (!email) {
-         throw new Error("E-mail incorreto");
+         throw new Error("E-mail não informado");
       }
       const userRepository = getCustomRepository(UserRepositories);
 
       const emailAlreadyExists = await userRepository.findOne({ email });
 
       if (emailAlreadyExists) {
-         throw new Error("E-mail já cadastrado no sistema");
+         throw new Error("E-mail já cadastrado");
       }
 
-      const user = {
+      const user: IUser = {
          name,
          email,
          admin,

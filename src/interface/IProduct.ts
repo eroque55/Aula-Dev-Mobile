@@ -1,4 +1,5 @@
 import ICategory from "./ICategory";
+import ISupplier from "./ISupplier";
 
 interface IProduct {
    id?: string;
@@ -6,6 +7,7 @@ interface IProduct {
    category: ICategory;
    description: string;
    price: number;
+   supplier?: ISupplier;
 }
 
 export default IProduct;

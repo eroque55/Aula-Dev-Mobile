@@ -3,8 +3,12 @@ import ListProductService from "../../service/product/ListProductService";
 
 export default class ListProductController {
    async handle(request: Request, response: Response) {
-      const listProductService = new ListProductService();
+      try {
+         const listProductService = new ListProductService();
 
-      response.json(await listProductService.execute());
+         response.json(await listProductService.execute());
+      } catch (e: any) {
+         response.status(400).send(e.message);
+      }
    }
 }

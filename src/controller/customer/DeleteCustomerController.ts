@@ -3,11 +3,15 @@ import DeleteCustomerService from "../../service/customer/DeleteCustomerService"
 
 export default class DeleteCustomerController {
    async handle(request: Request, response: Response) {
-      const deleteCustomerService = new DeleteCustomerService();
-      const id = request.params.id;
+      try {
+         const deleteCustomerService = new DeleteCustomerService();
+         const id = request.params.id;
 
-      const msg = await deleteCustomerService.execute(id);
+         const msg = await deleteCustomerService.execute(id);
 
-      response.json(msg);
+         response.json(msg);
+      } catch (e: any) {
+         response.status(400).send(e.message);
+      }
    }
 }

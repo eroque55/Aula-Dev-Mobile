@@ -11,6 +11,7 @@ import { v4 as uuid } from "uuid";
 
 import Category from "./Category";
 import Sale from "./Sale";
+import Supplier from "./Supplier";
 
 @Entity()
 class Product {
@@ -31,6 +32,9 @@ class Product {
 
    @ManyToMany(() => Sale, (sale) => sale.products)
    sales!: Sale[];
+
+   @ManyToOne(() => Supplier, (supplier) => supplier.products)
+   supplier!: Supplier;
 
    @CreateDateColumn()
    create_at!: Date;

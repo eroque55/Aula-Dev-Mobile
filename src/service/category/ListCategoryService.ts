@@ -1,17 +1,10 @@
-import ICategory from "../../interface/ICategory";
+import { getCustomRepository } from "typeorm";
+import CategoryRepositories from "../../repositories/CategoryRepositories";
 
 export default class ListCategoryService {
    async execute() {
-      const categories: ICategory[] = [
-         {
-            id: "1",
-            name: "Vestuario",
-         },
-         {
-            id: "2",
-            name: "Eletronicos",
-         },
-      ];
+      const categoryRepository = getCustomRepository(CategoryRepositories);
+      const categories = await categoryRepository.find();
 
       return categories;
    }

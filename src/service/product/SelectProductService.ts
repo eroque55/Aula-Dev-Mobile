@@ -1,14 +1,14 @@
-import IProduct from "../../interface/IProduct";
+import { getCustomRepository } from "typeorm";
+import ProductRepositories from "../../repositories/ProductRepositories";
 
 export default class SelectProductService {
    async execute(id: string) {
-      const product: IProduct = {
-         id,
-         name: "Camiseta",
-         category: { name: "Vestuario" },
-         description: "Camiseta preta",
-         price: 30,
-      };
+      const productRepository = getCustomRepository(ProductRepositories);
+      const product = await productRepository.findOne(id);
+
+      if (!product) {
+         return { message: "Produto não encontrado" };
+      }
 
       return product;
    }

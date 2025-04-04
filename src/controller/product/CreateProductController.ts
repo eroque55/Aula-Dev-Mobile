@@ -3,12 +3,14 @@ import CreateProductService from "../../service/product/CreateProductService";
 
 export default class CreateProductController {
    async handle(request: Request, response: Response) {
-      const createProductService = new CreateProductService();
-      const productRequest = request.body;
-      const product = await createProductService.execute(productRequest);
+      try {
+         const createProductService = new CreateProductService();
+         const productRequest = request.body;
+         const product = await createProductService.execute(productRequest);
 
-      response.json({
-         message: `Registro incluido com sucesso: ${product.name}`,
-      });
+         response.json(product);
+      } catch (e: any) {
+         response.status(400).send(e.message);
+      }
    }
 }

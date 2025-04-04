@@ -1,29 +1,10 @@
-import ICustomer from "../../interface/ICustomer";
+import { getCustomRepository } from "typeorm";
+import CustomerRepositories from "../../repositories/CustomerRepositories";
 
 export default class ListCustomerService {
    async execute() {
-      const customers: ICustomer[] = [
-         {
-            id: "1",
-            name: "Roque",
-            phone: "11972775377",
-            email: "roque@email.com",
-            address: "Rua das flores",
-            neighborhood: "Centro",
-            city: "Mogi das Cruzes",
-            state: "São Paulo",
-         },
-         {
-            id: "2",
-            name: "Maka",
-            phone: "11912345678",
-            email: "maka@email.com",
-            address: "Rua das flores",
-            neighborhood: "Centro",
-            city: "Mogi das Cruzes",
-            state: "São Paulo",
-         },
-      ];
+      const customerRepository = getCustomRepository(CustomerRepositories);
+      const customers = await customerRepository.find();
 
       return customers;
    }

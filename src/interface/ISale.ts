@@ -4,7 +4,7 @@ import IProduct from "./IProduct";
 interface ISale {
    id?: string;
    date: Date;
-   product: IProduct[];
+   products: IProduct[];
    customer: ICustomer;
    quantity: Number;
    total: Number;

@@ -1,23 +1,10 @@
-import IProduct from "../../interface/IProduct";
+import { getCustomRepository } from "typeorm";
+import ProductRepositories from "../../repositories/ProductRepositories";
 
 export default class ListProductService {
    async execute() {
-      const products: IProduct[] = [
-         {
-            id: "1",
-            name: "Camiseta",
-            category: { name: "Vestuario" },
-            description: "Camiseta preta",
-            price: 30,
-         },
-         {
-            id: "2",
-            name: "Calça",
-            category: { name: "Vestuario" },
-            description: "Calça preta",
-            price: 30,
-         },
-      ];
+      const productRepository = getCustomRepository(ProductRepositories);
+      const products = await productRepository.find();
 
       return products;
    }

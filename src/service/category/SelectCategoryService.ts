@@ -1,12 +1,15 @@
-import ICategory from "../../interface/ICategory";
+import { getCustomRepository } from "typeorm";
+import CategoryRepositories from "../../repositories/CategoryRepositories";
 
 export default class SelectCategoryService {
    async execute(id: string) {
-      const user: ICategory = {
-         id,
-         name: "Vestuario",
-      };
+      const categoryRepository = getCustomRepository(CategoryRepositories);
+      const category = await categoryRepository.findOne(id);
 
-      return user;
+      if (!category) {
+         throw new Error("Categoria não encontrada");
+      }
+
+      return category;
    }
 }

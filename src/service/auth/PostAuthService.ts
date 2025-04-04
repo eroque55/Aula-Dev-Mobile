@@ -1,14 +1,25 @@
 import IUser from "../../interface/IUser";
 import { sign } from "jsonwebtoken";
-import { hash, compare } from "bcryptjs";
+import { compare } from "bcryptjs";
+import { getCustomRepository } from "typeorm";
+import UserRepositories from "../../repositories/UserRepositories";
 
 export default class PostAuthService {
    async execute(user: IUser) {
       if (!user.email || !user.password) {
          throw new Error("E-mail e senha necessários");
       }
-      const password = await hash("fatec", 8);
-      const passwordMatch = await compare(user.password, password);
+      const userRepository = getCustomRepository(UserRepositories);
+      const dbUser = await userRepository.findOne({
+         where: { email: user.email },
+      });
+
+      if (!dbUser) {
+         throw new Error("Usuário não encontrado");
+      }
+
+      const passwordMatch = await compare(user.password, dbUser.password);
+
       if (!passwordMatch) {
          throw new Error("Senha incorreta");
       }

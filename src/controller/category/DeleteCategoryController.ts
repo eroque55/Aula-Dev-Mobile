@@ -3,11 +3,15 @@ import DeleteCategoryService from "../../service/category/DeleteCategoryService"
 
 export default class DeleteCategoryController {
    async handle(request: Request, response: Response) {
-      const deleteCategoryService = new DeleteCategoryService();
-      const id = request.params.id;
+      try {
+         const deleteCategoryService = new DeleteCategoryService();
+         const id = request.params.id;
 
-      const msg = await deleteCategoryService.execute(id);
+         const msg = await deleteCategoryService.execute(id);
 
-      response.json(msg);
+         response.json(msg);
+      } catch (e: any) {
+         response.status(400).send(e.message);
+      }
    }
 }

@@ -1,14 +1,15 @@
-import IUser from "../../interface/IUser";
+import { getCustomRepository } from "typeorm";
+import UserRepositories from "../../repositories/UserRepositories";
 
 export default class SelectUserService {
    async execute(id: string) {
-      const user: IUser = {
-         id,
-         name: "Roque",
-         email: "roque@email.com",
-         admin: true,
-         password: "senhadoroque",
-      };
+      const userRepository = getCustomRepository(UserRepositories);
+      const user = await userRepository.findOne(id);
+
+      if (!user) {
+         throw new Error("Usuário não encontrado");
+      }
+
       return user;
    }
 }
